@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ─── Base ───────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── AntD overrides ─────────────────────────────────────────── */
+
+/* Make AntD Layout components fill full height correctly */
+.ant-layout {
+  background: transparent !important;
+}
+
+/* Ensure AntD Menu horizontal items have consistent height */
+.ant-menu-horizontal {
+  border-bottom: none !important;
+  line-height: 64px !important;
+}
+
+/* AntD Card: consistent hover transition */
+.ant-card {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.add-cart-btn {
+  transition: all 0.3s ease;
+}
+
+.add-cart-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hero-btn {
+  transition: all 0.25s ease;
+}
+
+.hero-btn:hover {
+  transform: translateX(10px) scale(1.03);
+  border-color: rgba(11, 111, 158, 0.973) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+้.hero-btn:active {
+  transform: scale(0.97);
+}
