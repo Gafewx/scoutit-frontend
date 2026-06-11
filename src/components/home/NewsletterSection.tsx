@@ -10,7 +10,7 @@ export default function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
     if (!email) return;
     messageApi.success("Thanks for subscribing! Check your inbox.");
