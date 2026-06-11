@@ -3,7 +3,8 @@ import HeroSection from "@/components/home/HeroSection";
 import FeaturedCategories from "@/components/home/FeaturedCategories";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import WhyChooseScoutIT from "@/components/home/WhyChooseScoutIT";
-import NewsletterSection from "@/components/home/NewsletterSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import HeroCarousel from "@/components/home/HeroCarousel";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
@@ -13,9 +14,10 @@ export default function Home() {
       <main>
         <HeroSection />
         <FeaturedCategories />
+        <HeroCarousel />
         <FeaturedProducts />
         <WhyChooseScoutIT />
-        <NewsletterSection />
+        <TestimonialsSection />
       </main>
       <Footer />
     </>
