@@ -22,7 +22,12 @@ async function request<T>(
     throw new Error(error.message ?? "Request failed");
   }
 
-  return res.json();
+  if (res.status === 204) {
+    return {} as ApiResponse<T>;
+  }
+
+  const text = await res.text();
+  return text ? JSON.parse(text) : ({} as ApiResponse<T>);
 }
 
 export const api = {

@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" className={`${prompt.className} h-full`}>
+    <html lang="th" data-scroll-behavior="smooth" className={`${prompt.className} h-full`}>
       <body className="min-h-full flex flex-col bg-white">
         <AntdProvider>{children}</AntdProvider>
       </body>

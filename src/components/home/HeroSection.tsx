@@ -9,14 +9,14 @@ const { Title, Paragraph, Text } = Typography;
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-white py-16 sm:py-24" style={{ borderBottom: "1px solid #f1f5f9" }}>
-      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center product-fade-up-delay">
 
           {/* ── Left: Content ── */}
           <div className="lg:col-span-7">
             <Flex vertical gap={32}>
               {/* Badge */}
-              <div>
+              {/* <div>
                 <Tag
                   icon={<span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#2563eb", marginRight: 6, verticalAlign: "middle" }} />}
                   color="blue"
@@ -24,7 +24,7 @@ export default function HeroSection() {
                 >
                   พบกับสินค้าใหม่ล่าสุดทุกสัปดาห์
                 </Tag>
-              </div>
+              </div> */}
 
               {/* Headline */}
               <div>
@@ -78,7 +78,7 @@ export default function HeroSection() {
                   </Button>
                 </Link>
 
-                <Link href="/search">
+                <Link href="/products">
                   <Button
                     type="primary"
                     size="large"

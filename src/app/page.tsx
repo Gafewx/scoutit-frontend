@@ -12,12 +12,11 @@ export default function Home() {
     <>
       <Navbar />
       <main>
-        <HeroSection />
-        <FeaturedCategories />
         <HeroCarousel />
+        <FeaturedCategories />
         <FeaturedProducts />
-        <WhyChooseScoutIT />
         <TestimonialsSection />
+        <WhyChooseScoutIT />
       </main>
       <Footer />
     </>

@@ -61,8 +61,8 @@ export default function HeroCarousel() {
     carouselRef.current?.next();
   };
   return (
-    <section className="bg-white py-8" style={{ borderBottom: "1px solid #f1f5f9" }}>
-      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-8 border-b border-slate-100">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8 product-fade-up-delay">
         <div className="group relative overflow-hidden rounded-2xl shadow-xl bg-slate-950">
 
           {/* Custom Arrows */}

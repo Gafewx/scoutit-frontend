@@ -73,3 +73,182 @@ a {
 ้.hero-btn:active {
   transform: scale(0.97);
 }
+
+/* ─── Auth page animations ──────────────────────────────────── */
+
+@keyframes circuit-drift {
+  0% {
+    transform: translate(0px, 0px);
+  }
+
+  25% {
+    transform: translate(-20px, -12px);
+  }
+
+  50% {
+    transform: translate(-30px, 10px);
+  }
+
+  75% {
+    transform: translate(-10px, 20px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+.circuit-drift {
+  animation: circuit-drift 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes auth-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.auth-card-in {
+  animation: auth-card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes auth-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-fade-in {
+  animation: auth-fade-in 0.35s ease both;
+}
+
+/* ─── Product Detail page ────────────────────────────────────── */
+
+/* Signature: animated gradient border on image container */
+@keyframes gradient-trace {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Zoom on hover for main product image */
+.zoom-container {
+  overflow: hidden;
+}
+
+.zoom-container img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.zoom-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Content entrance */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.product-fade-up-delay {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Spec rows staggered entrance */
+@keyframes spec-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.spec-row-enter {
+  animation: spec-row-in 0.3s ease both;
+}
+
+/* CTA pulse on hover */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+  }
+}
+
+.cta-pulse:hover {
+  animation: pulse-glow 1.5s ease infinite;
+}
+
+/* Glass badge */
+.glass-badge {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Trust signal icons */
+.trust-icon {
+  transition: transform 0.2s ease;
+}
+
+.trust-icon:hover {
+  transform: translateY(-2px);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .product-image-glow:hover,
+  .product-fade-up,
+  .product-fade-up-delay,
+  .spec-row-enter,
+  .cta-pulse:hover {
+    animation: none;
+  }
+
+  .zoom-container:hover img {
+    transform: none;
+  }
+}
