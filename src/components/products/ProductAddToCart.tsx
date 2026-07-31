@@ -116,7 +116,7 @@ export default function ProductAddToCart({ product }: ProductAddToCartProps) {
               "!h-13 !rounded-xl !font-bold !text-base cta-pulse",
               "!transition-all !duration-200",
               inStock
-                ? "!bg-gradient-to-r !from-blue-600 !to-cyan-500 !border-0 hover:!from-blue-700 hover:!to-cyan-600 !shadow-md hover:!shadow-lg"
+                ? "!from-blue-600 !to-cyan-500 !border-0 hover:!from-blue-700 hover:!to-cyan-600 !shadow-md hover:!shadow-lg"
                 : "!bg-slate-300 !border-slate-300 !text-slate-500",
             ].join(" ")}
             block

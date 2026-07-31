@@ -61,29 +61,27 @@ export default function ProductInfo({ product, hasDiscount, discountPct }: Produ
       )}
 
       {/* ── Price block — gradient card ── */}
-      <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/30 px-6 py-5 shadow-sm">
-        <Flex align="baseline" gap={12} wrap="wrap">
-          <Text strong className="!text-4xl !text-slate-900 !leading-none !tracking-tight">
-            ฿{product.price.toLocaleString()}
-          </Text>
-          {hasDiscount && (
-            <>
-              <Text className="!text-lg !text-slate-400 line-through">
-                ฿{product.comparePrice!.toLocaleString()}
-              </Text>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold text-white bg-rose-500 shadow-sm">
-                ลด {discountPct}%
-              </span>
-            </>
-          )}
-        </Flex>
-
+      <Flex align="baseline" gap={12} wrap="wrap">
+        <Text strong className="!text-5xl !text-slate-900 !leading-none !tracking-tight">
+          ฿{product.price.toLocaleString()}
+        </Text>
         {hasDiscount && (
-          <Text className="!text-sm !text-emerald-600 !font-medium mt-2 block">
-            ประหยัด ฿{(product.comparePrice! - product.price).toLocaleString()}
-          </Text>
+          <>
+            <Text className="!text-lg !text-slate-400 line-through">
+              ฿{product.comparePrice!.toLocaleString()}
+            </Text>
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold text-white bg-rose-500 shadow-sm">
+              ลด {discountPct}%
+            </span>
+          </>
         )}
-      </div>
+      </Flex>
+
+      {hasDiscount && (
+        <Text className="!text-sm !text-emerald-600 !font-medium mt-2 block">
+          ประหยัด ฿{(product.comparePrice! - product.price).toLocaleString()}
+        </Text>
+      )}
 
       {/* ── Stock + SKU + Warranty ── */}
       <Flex gap={16} wrap="wrap" className="text-sm">
