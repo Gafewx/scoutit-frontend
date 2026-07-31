@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { App, Button, Typography } from "antd";
-import { CheckCircleFilled } from "@ant-design/icons";
+import { CheckCircleFilled, LoginOutlined } from "@ant-design/icons";
 import { useCart } from "@/context/CartContext";
+import { useAuthModal } from "@/context/AuthModalContext";
+import { ApiError } from "@/services/api";
 import type { Product } from "@/types/product.types";
 
 const { Text } = Typography;
@@ -15,6 +17,7 @@ interface ProductAddToCartProps {
 export default function ProductAddToCart({ product }: ProductAddToCartProps) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { openLoginModal } = useAuthModal();
   const { message } = App.useApp();
 
   const stock = product.stockQty ?? product.totalStock ?? 0;
@@ -36,8 +39,32 @@ export default function ProductAddToCart({ product }: ProductAddToCartProps) {
         icon: <CheckCircleFilled className="!text-green-500" />,
         duration: 3,
       });
-    } catch {
-      message.error("ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่");
+    } catch (err) {
+      if (err instanceof ApiError && err.statusCode === 401) {
+        message.warning({
+          content: (
+            <span>
+              กรุณา{" "}
+              <button
+                type="button"
+                onClick={openLoginModal}
+                className="font-semibold text-blue-600 cursor-pointer"
+              >
+                เข้าสู่ระบบ
+              </button>{" "}
+              ก่อนเพิ่มสินค้าลงตะกร้า
+            </span>
+          ),
+          icon: <LoginOutlined className="!text-amber-500" />,
+          duration: 5,
+        });
+      } else {
+        message.error(
+          err instanceof ApiError
+            ? err.message
+            : "ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่",
+        );
+      }
     }
   }
 

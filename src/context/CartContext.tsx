@@ -17,7 +17,7 @@ interface CartContextValue {
   cart: Cart | null;
   totalItems: number;
   loading: boolean;
-  mutating: boolean; // กำลัง add/remove/update item
+  mutating: boolean;
   addToCart: (productId: string, quantity?: number) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   updateQuantity: (productId: string, quantity: number) => Promise<void>;

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useRef, FormEvent } from "react";
+import { useState, useRef } from "react";
 import { Badge, Button, Skeleton } from "antd";
 import {
   AppstoreFilled,
@@ -12,21 +12,20 @@ import {
 } from "@ant-design/icons";
 import { useCart } from "@/context/CartContext";
 import { useUser } from "@/hooks/useUser";
-import LoginModal from "@/components/auth/LoginModal";
+import { useAuthModal } from "@/context/AuthModalContext";
 import UserMenu from "@/components/auth/UserMenu";
 import MegaMenu from "@/components/layout/MegaMenu";
 
 export default function Navbar() {
-  const [loginOpen, setLoginOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [megaOpen, setMegaOpen] = useState(false);
   const { totalItems } = useCart();
   const { user, loading: userLoading, logout } = useUser();
+  const { openLoginModal } = useAuthModal();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /* ── Hover helpers with small delay so moving into the panel doesn't flicker ── */
   function openMega() {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     setMegaOpen(true);
@@ -35,7 +34,7 @@ export default function Navbar() {
     closeTimerRef.current = setTimeout(() => setMegaOpen(false), 120);
   }
 
-  function handleSearch(e: FormEvent) {
+  function handleSearch(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     const q = searchQuery.trim();
     if (q) router.push(`/products?search=${encodeURIComponent(q)}`);
@@ -160,7 +159,7 @@ export default function Navbar() {
               <Button
                 id="navbar-signin"
                 icon={<UserOutlined />}
-                onClick={() => setLoginOpen(true)}
+                onClick={openLoginModal}
                 style={{
                   borderRadius: 24,
                   fontWeight: 600,
@@ -176,8 +175,6 @@ export default function Navbar() {
               </Button>
             )}
           </div>
-
-          <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
         </div>
       </div>
     </header>

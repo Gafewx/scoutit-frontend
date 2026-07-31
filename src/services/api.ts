@@ -1,5 +1,12 @@
 import type { ApiResponse } from "@/types/api.types";
 
+export class ApiError extends Error {
+  constructor(public readonly statusCode: number, message: string) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001/api/v1";
 
 async function request<T>(
@@ -18,8 +25,8 @@ async function request<T>(
   const res = await fetch(`${BASE_URL}${path}`, { ...options, headers });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({ message: res.statusText }));
-    throw new Error(error.message ?? "Request failed");
+    const body = await res.json().catch(() => ({ message: res.statusText }));
+    throw new ApiError(res.status, body.message ?? "Request failed");
   }
 
   if (res.status === 204) {

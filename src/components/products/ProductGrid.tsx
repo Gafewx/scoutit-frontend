@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { App, Button, Card, Flex, Skeleton, Tag, Typography } from "antd";
-import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
+import { ShoppingCartOutlined, EyeOutlined, LoginOutlined } from "@ant-design/icons";
+import { ApiError } from "@/services/api";
 import type { Product } from "@/types/product.types";
 import { useCart } from "@/context/CartContext";
+import { useAuthModal } from "@/context/AuthModalContext";
 
 const { Text } = Typography;
 
@@ -44,6 +46,7 @@ function ProductCardGrid({ product }: { product: Product }) {
     ? Math.round(((product.comparePrice! - product.price) / product.comparePrice!) * 100)
     : 0;
   const { addToCart, loading } = useCart();
+  const { openLoginModal } = useAuthModal();
   const { message } = App.useApp();
 
   async function handleAddToCart(e: React.MouseEvent) {
@@ -51,8 +54,32 @@ function ProductCardGrid({ product }: { product: Product }) {
     try {
       await addToCart(product.id);
       message.success(`เพิ่ม "${product.name}" ลงตะกร้าแล้ว`);
-    } catch {
-      message.error("ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่");
+    } catch (err) {
+      if (err instanceof ApiError && err.statusCode === 401) {
+        message.warning({
+          content: (
+            <span>
+              กรุณา{" "}
+              <button
+                type="button"
+                onClick={openLoginModal}
+                className="font-semibold text-blue-600 cursor-pointer"
+              >
+                เข้าสู่ระบบ
+              </button>{" "}
+              ก่อนเพิ่มสินค้าลงตะกร้า
+            </span>
+          ),
+          icon: <LoginOutlined className="!text-amber-500" />,
+          duration: 5,
+        });
+      } else {
+        message.error(
+          err instanceof ApiError
+            ? err.message
+            : "ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่",
+        );
+      }
     }
   }
 
@@ -202,6 +229,7 @@ function ProductCardList({ product }: { product: Product }) {
     ? Math.round(((product.comparePrice! - product.price) / product.comparePrice!) * 100)
     : 0;
   const { addToCart, loading } = useCart();
+  const { openLoginModal } = useAuthModal();
   const { message } = App.useApp();
 
   async function handleAddToCart(e: React.MouseEvent) {
@@ -209,8 +237,32 @@ function ProductCardList({ product }: { product: Product }) {
     try {
       await addToCart(product.id);
       message.success(`เพิ่ม "${product.name}" ลงตะกร้าแล้ว`);
-    } catch {
-      message.error("ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่");
+    } catch (err) {
+      if (err instanceof ApiError && err.statusCode === 401) {
+        message.warning({
+          content: (
+            <span>
+              กรุณา{" "}
+              <button
+                type="button"
+                onClick={openLoginModal}
+                className="font-semibold text-blue-600 cursor-pointer"
+              >
+                เข้าสู่ระบบ
+              </button>{" "}
+              ก่อนเพิ่มสินค้าลงตะกร้า
+            </span>
+          ),
+          icon: <LoginOutlined className="!text-amber-500" />,
+          duration: 5,
+        });
+      } else {
+        message.error(
+          err instanceof ApiError
+            ? err.message
+            : "ไม่สามารถเพิ่มสินค้าได้ กรุณาลองใหม่",
+        );
+      }
     }
   }
 

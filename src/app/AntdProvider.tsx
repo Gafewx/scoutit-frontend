@@ -3,6 +3,7 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider, App } from "antd";
 import { CartProvider } from "@/context/CartContext";
+import { AuthModalProvider } from "@/context/AuthModalContext";
 
 const scoutitTheme = {
   token: {
@@ -57,7 +58,9 @@ export default function AntdProvider({
     <AntdRegistry>
       <ConfigProvider theme={scoutitTheme}>
         <App>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <AuthModalProvider>{children}</AuthModalProvider>
+          </CartProvider>
         </App>
       </ConfigProvider>
     </AntdRegistry>
